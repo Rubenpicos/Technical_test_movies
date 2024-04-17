@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import Posters from "./components/Posters";
+import React, { useEffect, useState } from "react";
 
-function App() {
-  const [titles, setTitles] = useState([]);
+const Posters = () => {
+  const [posters, setPosters] = useState([]);
+
   useEffect(() => {
     const movies = {
       method: "GET",
@@ -20,27 +19,25 @@ function App() {
     )
       .then((response) => response.json())
       .then((response) => {
-        const movieTitles = response.results.slice(0, 8).map((result) => {
-          return result.original_title;
-        });
-        setTitles(movieTitles);
+        const postersMovie = response.results
+          .slice(0, 8)
+          .map((movie) => movie.poster_path);
+        setPosters(postersMovie);
       })
       .catch((error) => console.error(error));
   }, []);
+
   return (
-    <>
-      <h1>Movies</h1>
-      <div className="container">
-        <ol>
-          {titles.map((title, index) => (
-            <li key={index}>{title}</li>
-          ))}
-        </ol>
-
-        <Posters />
-      </div>
-    </>
+    <div className="posters">
+      {posters.map((poster, index) => (
+        <img
+          key={index}
+          src={`https://image.tmdb.org/t/p/w500/${poster}`}
+          alt={`Poster ${index}`}
+        />
+      ))}
+    </div>
   );
-}
+};
 
-export default App;
+export default Posters;
