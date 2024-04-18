@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Posters from "./components/Posters";
+import Select from "./components/Select";
 
 function App() {
   const [titles, setTitles] = useState([]);
@@ -30,12 +31,15 @@ function App() {
   return (
     <>
       <h1>Movies</h1>
+
+      <Select />
+
       <div className="container">
-        <ol>
+        {/* <ol>
           {titles.map((title, index) => (
             <li key={index}>{title}</li>
           ))}
-        </ol>
+        </ol> */}
 
         <Posters />
       </div>
