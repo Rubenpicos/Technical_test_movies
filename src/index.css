@@ -1,33 +1,47 @@
 body {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.container {
-  display: flex;
-  flex-direction: row;
-}
+
 h1 {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 4rem;
+  text-decoration: underline;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
-  margin: 0 auto;
-}
-ol {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 800px;
-  text-transform: uppercase;
-  font-size: 1.2rem;
+  color: #ffd401;
 }
 
-li {
-  padding: 0.6rem;
+.container {
+  margin-top: 5rem;
 }
+
 .posters {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 60rem;
+}
+
+.posters img {
+  width: 8.5rem;
+  padding: 1rem;
+  margin: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.posters img:hover {
+  transform: scale(1.5);
+}
+
+.genre {
+  display: flex;
   flex-direction: column;
-  width: 100px;
-  margin-left: 10rem;
+  justify-content: center;
+  align-items: center;
 }
