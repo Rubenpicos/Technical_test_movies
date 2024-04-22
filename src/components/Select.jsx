@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+
 const Select = ({ setSelectGenre }) => {
   const [genres, setGenres] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -16,7 +18,7 @@ const Select = ({ setSelectGenre }) => {
           }
         );
         const data = await response.json();
-        setGenres(data.genres);
+        setGenres([...data.genres, { id: "999", name: "No Movies Genre" }]);
       } catch (error) {
         console.error("Error with genres:", error);
       }
@@ -27,18 +29,24 @@ const Select = ({ setSelectGenre }) => {
 
   const handleGenreChange = (event) => {
     setSelectGenre(event.target.value);
+    if (event.target.value === "999") {
+      setErrorMessage("There are no movies with that genre");
+    } else {
+      setErrorMessage("All these movies have this genre:");
+    }
   };
 
   return (
     <div className="genre">
       <select name="genre" className="btn" onChange={handleGenreChange}>
-        <option value="">Choose an genre</option>
+        <option value="">Choose a genre</option>
         {genres.map((genre) => (
           <option key={genre.id} value={genre.id}>
             {genre.name}
           </option>
         ))}
       </select>
+      {errorMessage && <p className="error">{errorMessage}</p>}
     </div>
   );
 };
@@ -46,4 +54,5 @@ const Select = ({ setSelectGenre }) => {
 Select.propTypes = {
   setSelectGenre: PropTypes.func.isRequired,
 };
+
 export default Select;
