@@ -17,7 +17,7 @@ h1 {
 }
 
 .container {
-  margin-top: 5rem;
+  margin-top: 2.5em;
 }
 
 .posters {
@@ -44,4 +44,19 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.movie_name {
+  color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.container p {
+  color: #ffd401;
+  transition: 300 all ease-in;
+  transform: translateY(0);
 }

@@ -28,15 +28,19 @@ const Posters = () => {
   }, []);
 
   return (
-    <div className="posters">
-      {posters.map((poster, index) => (
-        <img
-          key={index}
-          src={`https://image.tmdb.org/t/p/w500/${poster}`}
-          alt={`Poster ${index}`}
-        />
-      ))}
-    </div>
+    <>
+      <div className="posters">
+        {posters.map((poster, index) => (
+          <a key={index} className="article">
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${poster}`}
+              alt={`Poster ${index}`}
+            />
+            <p className="movie_name">título</p>
+          </a>
+        ))}
+      </div>
+    </>
   );
 };
 

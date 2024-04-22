@@ -24,6 +24,7 @@ function App() {
         const movieTitles = response.results.slice(0, 8).map((result) => {
           return result.original_title;
         });
+
         setTitles(movieTitles);
       })
       .catch((error) => console.error(error));
@@ -35,11 +36,11 @@ function App() {
       <Select />
 
       <div className="container">
-        {/* <ol>
+        <ol>
           {titles.map((title, index) => (
             <li key={index}>{title}</li>
           ))}
-        </ol> */}
+        </ol>
 
         <Posters />
       </div>
