@@ -47,12 +47,12 @@ h1 {
 }
 
 .movie_name {
-  color: red;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-transform: uppercase;
+  max-width: 200px;
+  font-weight: 500;
 }
 
 .container p {

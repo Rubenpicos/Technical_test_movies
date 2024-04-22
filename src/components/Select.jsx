@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-
-const Select = () => {
+import PropTypes from "prop-types";
+const Select = ({ setSelectGenre }) => {
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
@@ -17,7 +17,6 @@ const Select = () => {
         );
         const data = await response.json();
         setGenres(data.genres);
-        console.log(data.genres);
       } catch (error) {
         console.error("Error with genres:", error);
       }
@@ -26,9 +25,13 @@ const Select = () => {
     fetchGenres();
   }, []);
 
+  const handleGenreChange = (event) => {
+    setSelectGenre(event.target.value);
+  };
+
   return (
     <div className="genre">
-      <select name="genre" className="btn">
+      <select name="genre" className="btn" onChange={handleGenreChange}>
         <option value="">Choose an genre</option>
         {genres.map((genre) => (
           <option key={genre.id} value={genre.id}>
@@ -40,4 +43,7 @@ const Select = () => {
   );
 };
 
+Select.propTypes = {
+  setSelectGenre: PropTypes.func.isRequired,
+};
 export default Select;

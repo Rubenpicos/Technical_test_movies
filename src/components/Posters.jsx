@@ -1,47 +1,44 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
-const Posters = () => {
-  const [posters, setPosters] = useState([]);
+const Posters = ({ selectGenre }) => {
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    const movies = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYmEwOTEyMjA5NmZkM2Y2ODY3N2VkNTVmZDc0YjhhMyIsInN1YiI6IjY1ZDM2MGFmZTA0ZDhhMDE2Mzk4YWI0MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2u9B1noWUTd7Y0nQQ6mw4t5fsBNMcExAXgW97P5ce0Y",
-      },
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/discover/movie?api_key=2ba09122096fd3f68677ed55fd74b8a3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${selectGenre}`
+        );
+        const data = await response.json();
+        setMovies(data.results.slice(0, 8));
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
     };
 
-    fetch(
-      "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
-      movies
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        const postersMovie = response.results
-          .slice(0, 8)
-          .map((movie) => movie.poster_path);
-        setPosters(postersMovie);
-      })
-      .catch((error) => console.error(error));
-  }, []);
+    fetchMovies();
+  }, [selectGenre]);
 
   return (
     <>
       <div className="posters">
-        {posters.map((poster, index) => (
+        {movies.map((movie, index) => (
           <a key={index} className="article">
             <img
-              src={`https://image.tmdb.org/t/p/w500/${poster}`}
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt={`Poster ${index}`}
             />
-            <p className="movie_name">título</p>
+            <p className="movie_name">{movie.title}</p>
           </a>
         ))}
       </div>
     </>
   );
+};
+
+Posters.propTypes = {
+  selectGenre: PropTypes.string.isRequired,
 };
 
 export default Posters;

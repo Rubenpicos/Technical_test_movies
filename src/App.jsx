@@ -5,6 +5,7 @@ import Select from "./components/Select";
 
 function App() {
   const [titles, setTitles] = useState([]);
+  const [selectGenre, setSelectGenre] = useState("");
   useEffect(() => {
     const movies = {
       method: "GET",
@@ -31,18 +32,12 @@ function App() {
   }, []);
   return (
     <>
-      <h1>Movies</h1>
-
-      <Select />
-
-      <div className="container">
-        <ol>
-          {titles.map((title, index) => (
-            <li key={index}>{title}</li>
-          ))}
-        </ol>
-
-        <Posters />
+      <div>
+        <h1>Movies</h1>
+        <Select setSelectGenre={setSelectGenre} />
+        <div className="container">
+          <Posters titles={titles} selectGenre={selectGenre} />
+        </div>
       </div>
     </>
   );
