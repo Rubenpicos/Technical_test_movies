@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import useDescription from "../hooks/useDescription";
 
 const Posters = ({ selectGenre }) => {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = React.useState([]);
+  const { description, fetchMovieDescription } = useDescription();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -20,20 +22,32 @@ const Posters = ({ selectGenre }) => {
     fetchMovies();
   }, [selectGenre]);
 
+  useEffect(() => {
+    if (description) {
+      alert(description);
+    }
+  }, [description]);
+
+  const handleClick = async (movieId) => {
+    await fetchMovieDescription(movieId);
+  };
+
   return (
-    <>
-      <div className="posters">
-        {movies.map((movie, index) => (
-          <a key={index} className="article">
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-              alt={`Poster ${index}`}
-            />
-            <p className="movie_name">{movie.title}</p>
-          </a>
-        ))}
-      </div>
-    </>
+    <div className="posters">
+      {movies.map((movie, index) => (
+        <div
+          key={index}
+          className="article"
+          onClick={() => handleClick(movie.id)}
+        >
+          <img
+            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+            alt={`Poster ${index}`}
+          />
+          <p className="movie_name">{movie.title}</p>
+        </div>
+      ))}
+    </div>
   );
 };
 
