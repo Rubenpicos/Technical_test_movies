@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import useDescription from "../hooks/useDescription";
 
-const Posters = ({ selectGenre }) => {
-  const [movies, setMovies] = React.useState([]);
+const Posters = ({ selectGenre, titles }) => {
+  const [movies, setMovies] = useState([]);
   const { description, fetchMovieDescription } = useDescription();
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const Posters = ({ selectGenre }) => {
             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
             alt={`Poster ${index}`}
           />
-          <p className="movie_name">{movie.title}</p>
+          <p className="movie_name">{titles[index]}</p>
         </div>
       ))}
     </div>
@@ -53,6 +53,7 @@ const Posters = ({ selectGenre }) => {
 
 Posters.propTypes = {
   selectGenre: PropTypes.string.isRequired,
+  titles: PropTypes.array.isRequired,
 };
 
 export default Posters;
