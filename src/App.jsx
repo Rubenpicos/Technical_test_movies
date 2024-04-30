@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import Posters from "./components/Posters";
 import Select from "./components/Select";
 
