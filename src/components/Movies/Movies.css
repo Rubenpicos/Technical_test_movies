@@ -1,0 +1,28 @@
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 60rem;
+}
+
+.movie__poster {
+  width: 8.5rem;
+  padding: 1rem;
+  margin: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.movie__poster:hover {
+  transform: scale(1.5);
+}
+
+.movie__name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 12.5rem;
+  font-weight: 500;
+  color: #ffd401;
+}

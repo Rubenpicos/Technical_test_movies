@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Posters from "./components/Posters";
 import Select from "./components/Select";
+import Movies from "./components/Movies/Movies";
 
 function App() {
-  const [titles, setTitles] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [selectGenre, setSelectGenre] = useState("");
 
   useEffect(() => {
@@ -13,12 +13,18 @@ function App() {
           `https://api.themoviedb.org/3/discover/movie?api_key=2ba09122096fd3f68677ed55fd74b8a3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${selectGenre}`
         );
         const data = await response.json();
-        const movieTitles = data.results.slice(0, 8).map((result) => {
-          return result.original_title;
+        const movies = data.results.slice(0, 8).map((result) => {
+          return {
+            id: result.id,
+            title: result.original_title,
+            poster: result.poster_path,
+            popularity: result.popularity,
+          };
         });
-        setTitles(movieTitles);
+        setMovies(movies);
       } catch (error) {
         console.error("Error fetching movie titles:", error);
+        //ToDo: Cacht error on screen
       }
     };
 
@@ -32,7 +38,7 @@ function App() {
 
         <Select setSelectGenre={setSelectGenre} />
         <div className="container">
-          <Posters titles={titles} selectGenre={selectGenre} />
+          <Movies movies={movies} selectGenre={selectGenre} />
         </div>
       </div>
     </>

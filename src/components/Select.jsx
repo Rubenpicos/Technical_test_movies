@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 
 const Select = ({ setSelectGenre }) => {
   const [genres, setGenres] = useState([]);
@@ -49,10 +48,6 @@ const Select = ({ setSelectGenre }) => {
       {errorMessage && <p className="error">{errorMessage}</p>}
     </div>
   );
-};
-
-Select.propTypes = {
-  setSelectGenre: PropTypes.func.isRequired,
 };
 
 export default Select;

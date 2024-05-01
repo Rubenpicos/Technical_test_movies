@@ -20,45 +20,11 @@ h1 {
   margin-top: 1.5rem;
 }
 
-.posters {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 60rem;
-}
-
-.posters img {
-  width: 8.5rem;
-  padding: 1rem;
-  margin: 1rem;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-}
-
-.posters img:hover {
-  transform: scale(1.5);
-}
-
 .genre {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.movie_name {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  max-width: 200px;
-  font-weight: 500;
-}
-
-.container p {
-  color: #ffd401;
-  transition: 300 all ease-in;
-  transform: translateY(0);
 }
 
 .error {
