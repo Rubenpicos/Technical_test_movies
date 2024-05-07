@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const useDescription = () => {
   const [description, setDescription] = useState("");
@@ -12,8 +12,15 @@ const useDescription = () => {
       setDescription(data.overview);
     } catch (error) {
       console.error("Error fetching movie description:", error);
+      //ToDo: Cacht error on screen
     }
   };
+
+  useEffect(() => {
+    if (description) {
+      alert(description);
+    }
+  }, [description]);
 
   return { description, fetchMovieDescription };
 };
