@@ -19,12 +19,12 @@ function App() {
             title: result.original_title,
             poster: result.poster_path,
             popularity: result.popularity,
+            date: result.release_date,
           };
         });
         setMovies(movies);
       } catch (error) {
         console.error("Error fetching movie titles:", error);
-        //ToDo: Cacht error on screen
       }
     };
 
@@ -33,11 +33,11 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="container">
         <h1>Movies</h1>
 
         <Select setSelectGenre={setSelectGenre} />
-        <div className="container">
+        <div>
           <Movies movies={movies} selectGenre={selectGenre} />
         </div>
       </div>
