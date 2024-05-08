@@ -1,6 +1,11 @@
 import "./Movies.css";
 
 const Movies = ({ movies }) => {
+  const formatDate = (premiere) => {
+    const date = new Date(premiere);
+    const confiDate = { month: "short", day: "numeric", year: "numeric" };
+    return date.toLocaleDateString("en-Us", confiDate);
+  };
   return (
     <section className="movies">
       {movies.map((movie) => (
@@ -13,7 +18,7 @@ const Movies = ({ movies }) => {
           <div className="movie__info">
             <h2 className="movie__info__vote">{movie.vote}%</h2>
             <h2 className="movie__info__name">{movie.title}</h2>
-            <p className="movie__info__date"> {movie.date}</p>
+            <h3 className="movie__info__date"> {formatDate(movie.date)}</h3>
           </div>
         </article>
       ))}

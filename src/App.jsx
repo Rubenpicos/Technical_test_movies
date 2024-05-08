@@ -13,7 +13,7 @@ function App() {
           `https://api.themoviedb.org/3/discover/movie?api_key=2ba09122096fd3f68677ed55fd74b8a3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${selectGenre}`
         );
         const data = await response.json();
-        const movies = data.results.slice(0, 12).map((result) => {
+        const movies = data.results.slice(0, 10).map((result) => {
           return {
             id: result.id,
             title: result.original_title,
